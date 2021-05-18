@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{title}}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h2 class="display-4">BMI Calculation</h2>
+                <hr class="my-4">
+                {% block navbar %}
+                {% endblock navbar %}
+                {% block content %}
+                    <p>This is base file.</p>
+                {% endblock content %}
+            </div>
+        </div>
+
+    </body>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+</html>

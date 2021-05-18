@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block title %}Calculate{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block main_content %}
+
+<div class="container">
+    <div class="row justify-content-around mt-8">
+        <div class="col-sm-6">
+            <h3 class="text-white text-center">Calculate BMI</h3>
+        </div>
+    </div>
+    <div class="row justify-content-around mt-3">
+        <div class="col-sm-4">
+            <form action="" method="post" class= 'bg-white p-3 rounded shadow'>
+                {% csrf_token %}
+                {% for form in form %}
+                    {{form.label_tag}}
+                    {{form.as_p}}
+                    {{form}}
+                {% endfor %}
+                <br><input type="submit" value="Calculate" class="btn btn-primary my-2">
+            </form>
+            {% if is_form_submitted %}
+    {% if 18.5 >= bmi %}
+    <h5 style="color:orange;"> Your Body Mass Index is {{bmi}}. This is considered {{suggestion}}. </h5>
+    {% endif %}
+
+    {% if bmi >= 18.6 and 24.9 >= bmi %}
+    <h5 style="color:green;"> Your Body Mass Index is {{bmi}}. This is considered {{suggestion}}. </h5>
+    {% endif %}
+
+    {% if bmi >= 25 and 29.9 >= bmi %}
+    <h5 style="color:blue;"> Your Body Mass Index is {{bmi}}. This is considered {{suggestion}}. </h5>
+    {% endif %}
+
+    {% if bmi >= 30 %}
+    <h5 style="color:red;"> Your Body Mass Index is {{bmi}}. This is considered {{suggestion}}. </h5>
+    {% endif %}
+
+    {% if bmi <= 18.5 %}
+        <h6>
+            1)This indicates a lean BMI, which means you have a low amount of body fat. If you are an athlete, this can be desirable. If you are not an athlete, a lean BMI can indicate that your weight may be too low, which may lower your immunity. If your BMI and body weight are low, you should consider gaining weight through good diet and exercise habits, to increase your muscle mass.
+        </h6>
+
+    {% elif bmi >= 18.6 and bmi <= 24.9 %}
+        <h6>
+            1)You are fit and fine
+        </h6>
+
+    {% elif bmi >= 25 and bmi <= 29.9 %}
+        <h6>
+            1)This indicates an unhealthy condition, your excess mass is putting you at risk for heart disease, diabetes, high blood pressure, gall bladder disease, circulation problems, and some cancers. You should lose weight by changing your diet and exercising more.
+        </h6>
+
+    {% else %}
+        <h6>
+            1) Avoid fried and oily foods.<br>
+            2) Avoid taking fats like butter,ghee because they increase the level of cholesterol in their blood.<br>
+            3) Stop eating between meals.<br>
+            4) Eating something all the time increases the calorie intake and thus increases weight.<br>
+        </h6>
+    {% endif %}
+{% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block title %}Details{% endblock title %}
+
+{% block main_content %}
+<section class="container">
+    <div class="row justify-content-around text-center mt-5">
+        <div class="col-sm-8">
+            <h3>USER BMI CALCULATION LIST</h3>
+        </div>
+    </div>
+    <div class="row justify-content-around mt-3">
+        <div class="col-sm-12">
+            <a href="{% url 'bmi_app:bmi_calculate' %}" class="btn btn-primary float-end">Add New</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-around text-center mt-1">
+        <div class="col-sm-12">
+            <table class="table table-dark table-hover">
+                <thead class="border-bottom font-weight-bold">
+            <tr>
+                <th>User</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Bmi</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bmimeasurement in bmimeasurements %}
+                <tr>
+                    <td>{{ bmimeasurement.user}}</td>
+                    <td>
+                        <a href="{% url 'bmi_app:bmi_edit' bmimeasurement.id %}">{{ bmimeasurement.weight }}</a>
+                    </td>
+                    <td>{{ bmimeasurement.height }}</td>
+                    <td>{{ bmimeasurement.bmi }}</td>
+                    <td>{{ bmimeasurement.created }}</td>
+                    <td>{{ bmimeasurement.modified }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{% url 'bmi_app:bmi_delete' bmimeasurement.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+{% endblock main_content %}

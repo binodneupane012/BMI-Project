@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Profile List</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>First_name</th>
+            <th>Last_name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        {% for profile in profiles %}
+            <tr>
+                <td>
+                    <a href="{% url 'useraccount_app:profile_edit' profile.id %}">{{ profile.first_name }}</a>
+                </td>
+                <td>{{ profile.last_name }}</td>
+                <td>{{ profile.address }}</td>
+                <td>{{ profile.contact }}</td>
+                <td>{{ profile.age }}</td>
+                <td>{{ profile.email }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'useraccount_app:profile_delete' profile.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock content %}
