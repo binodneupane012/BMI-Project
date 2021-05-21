@@ -36,7 +36,7 @@
                         <a href="{% url 'bmi_app:bmi_edit' bmimeasurement.id %}">{{ bmimeasurement.weight }}</a>
                     </td>
                     <td>{{ bmimeasurement.height }}</td>
-                    <td>{{ bmimeasurement.bmi }}</td>
+                    <td>{{ bmimeasurement.bmi|floatformat:2 }}</td>
                     <td>{{ bmimeasurement.created }}</td>
                     <td>{{ bmimeasurement.modified }}</td>
                     <td>
