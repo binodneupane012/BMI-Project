@@ -20,6 +20,7 @@
                     {{form}}
                 {% endfor %}
                 <br><input type="submit" value="Calculate" class="btn btn-primary my-2">
+                <a class="btn btn-warning text-center" href="{% url 'bmi_app:send_report' %}" value="send mail">Send Mail </a>
             </form>
             {% if is_form_submitted %}
     {% if 18.5 >= bmi %}

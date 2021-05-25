@@ -18,7 +18,7 @@ class Suggestion(models.Model):
 
 
 class BMIMeasurement(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name="bmi_app", on_delete=models.CASCADE, null=True)
     weight = models.FloatField()
     height = models.FloatField()
     bmi = models.FloatField()
@@ -27,3 +27,6 @@ class BMIMeasurement(models.Model):
 
     def bmi(self):
         return self.weight/self.height**2
+
+    def __str__(self):
+        return str(self.weight)

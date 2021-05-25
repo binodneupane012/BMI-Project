@@ -34,11 +34,12 @@ def signup_view(request):
 
 def send_confirm_email(request):
     subject = "Test Subject"
-    message = "Test Message"
-    from_email = "nbnod1122@gmail.com"
-    recipient_list = [ "binod997243@gmail.com", ]
+    message = "Test Meassage"
+    from_email = "ytddash@gmail.com"
+    recipient_list = ["binod997243@gmail.com"]
     context = {"name": "Binod"}
-    html_message = render_to_string("test.html", context)
-    res = send_mail(subject, message, from_email, recipient_list, html_message=html_message)
+    html_message = render_to_string("user_profile.html")
+    res = send_mail(subject, message, from_email,
+    recipient_list, html_message=html_message)
     return HttpResponse(res)
 

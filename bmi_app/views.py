@@ -4,6 +4,10 @@ from bmi_app.forms import BmimeasuremantForm
 from bmi_app.models import BMIMeasurement, Suggestion
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from  django.template.loader import render_to_string
+
+
 
 # Create your views here.
 
@@ -52,5 +56,25 @@ def bmi_delete(request, id):
     bmimeasurement = get_object_or_404(BMIMeasurement, id=id)
     bmimeasurement.delete()
     return HttpResponseRedirect(reverse("bmi_app:bmi_list"))
+
+
+def send_report(request):
+    bmi = round(BMIMeasurement.bmi(BMIMeasurement.objects.all().last()),2)
+    if bmi <= 18.5:
+        message = "Underweight. You need to increase your weight"
+    elif bmi >= 18.6 and bmi <=24.9:
+        message = "Normal weight. You are fit and fine keep it up"
+    elif bmi > 25 and bmi < 29.9:
+        message = "Overweight. You need to reduce your weight"
+    else:
+        message = "obsessed. You are very overweight, please consult a doctor"
+    send_mail(  "BMI report",
+                message + " Your BMI is "+ str(bmi),
+                "ytddash@gmail.com",
+                ["binod997243@gmail.com"],
+                # [request.user.profile.email],
+                # false_silently = False
+            )
+    return render(request, "report.html",{})
 
 
