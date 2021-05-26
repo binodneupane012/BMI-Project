@@ -71,8 +71,8 @@ def send_report(request):
     send_mail(  "BMI report",
                 message + " Your BMI is "+ str(bmi),
                 "ytddash@gmail.com",
-                ["binod997243@gmail.com"],
-                # [request.user.profile.email],
+                # ["binod997243@gmail.com"],
+                [request.user.profile.email],
                 # false_silently = False
             )
     return render(request, "report.html",{})

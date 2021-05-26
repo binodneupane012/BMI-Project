@@ -14,16 +14,14 @@
         </tr>
         {% for profile in profiles %}
             <tr>
-                <td>
-                    <a href="{% url 'useraccount_app:profile_edit' profile.id %}">{{ profile.first_name }}</a>
-                </td>
+                <td>{{ profile.first_name }}</td>
                 <td>{{ profile.last_name }}</td>
                 <td>{{ profile.address }}</td>
                 <td>{{ profile.contact }}</td>
                 <td>{{ profile.age }}</td>
                 <td>{{ profile.email }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'useraccount_app:profile_delete' profile.id %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'useraccount_app:profile_edit' profile.id %}">Edit</a>
                 </td>
             </tr>
         {% endfor %}

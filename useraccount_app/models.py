@@ -6,13 +6,13 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
     contact = models.CharField(max_length=255, null=True, blank=True)
-    age = models.IntegerField(default=1)
-    email = models.EmailField(max_length=255)
+    age = models.IntegerField(default=0)
+    email = models.EmailField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.user)

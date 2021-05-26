@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse, Http404, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-# from useraccount_app.forms import ProfileForm
+from useraccount_app.forms import ProfileForm
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from useraccount_app.models import Profile
@@ -12,6 +12,35 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
+
+def profile_list(request):
+    profiles = Profile.objects.filter(user=request.user)
+    context = {"profiles": profiles}
+    print (context)
+    return render(request, 'profile_list.html', context)
+
+# def profile_add(request):
+#     form = ProfileForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
+#     context = {"form": form}
+#     return render(request, 'form.html', context)
+
+def profile_edit(request, id):
+    profile = get_object_or_404(Profile, id=id)
+    form = ProfileForm(request.POST or None, instance=profile)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
+    context = {"form": form}
+    return render(request, 'profile_form.html', context)
+
+
+# def profile_delete(request, id):
+#     profile = get_object_or_404(Profile, id=id)
+#     profile.delete()
+#     return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
 
 
 class UserLogin(LoginView):
