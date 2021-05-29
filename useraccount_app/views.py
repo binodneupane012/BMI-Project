@@ -19,13 +19,6 @@ def profile_list(request):
     print (context)
     return render(request, 'profile_list.html', context)
 
-# def profile_add(request):
-#     form = ProfileForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
-#     context = {"form": form}
-#     return render(request, 'form.html', context)
 
 def profile_edit(request, id):
     profile = get_object_or_404(Profile, id=id)
@@ -35,12 +28,6 @@ def profile_edit(request, id):
         return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
     context = {"form": form}
     return render(request, 'profile_form.html', context)
-
-
-# def profile_delete(request, id):
-#     profile = get_object_or_404(Profile, id=id)
-#     profile.delete()
-#     return HttpResponseRedirect(reverse("useraccount_app:profile_list"))
 
 
 class UserLogin(LoginView):
